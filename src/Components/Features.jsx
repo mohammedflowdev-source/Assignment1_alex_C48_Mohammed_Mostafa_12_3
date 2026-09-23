@@ -1,4 +1,4 @@
-export default function Features({ search, setSearch }) {
+export default function Features({ search, setSearch, category, setCategory }) {
     return <>
         <section className="bg-[#0a0a0a] px-4 py-12 text-white">
             <div className="mx-auto max-w-7xl">
@@ -11,12 +11,19 @@ export default function Features({ search, setSearch }) {
                         </svg>
                     </div>
                     <div className="flex flex-wrap items-center gap-2">
-                        <button className="rounded-lg bg-[#ec5b0b] px-4 py-2 text-sm font-medium text-white">جميع المقالات</button>
-                        <button className="rounded-lg border border-[#262626] bg-[#121212] px-4 py-2 text-sm text-[#959595] hover:border-[#ec5b0b] hover:text-white">إضاءة</button>
-                        <button className="rounded-lg border border-[#262626] bg-[#121212] px-4 py-2 text-sm text-[#959595] hover:border-[#ec5b0b] hover:text-white">بورتريه</button>
-                        <button className="rounded-lg border border-[#262626] bg-[#121212] px-4 py-2 text-sm text-[#959595] hover:border-[#ec5b0b] hover:text-white">مناظر طبيعية</button>
-                        <button className="rounded-lg border border-[#262626] bg-[#121212] px-4 py-2 text-sm text-[#959595] hover:border-[#ec5b0b] hover:text-white">تقنيات</button>
-                        <button className="rounded-lg border border-[#262626] bg-[#121212] px-4 py-2 text-sm text-[#959595] hover:border-[#ec5b0b] hover:text-white">معدات</button>
+                        {['all', 'إضاءة', 'بورتريه', 'مناظر طبيعية', 'تقنيات', 'معدات'].map((cat) => (
+                            <button 
+                                key={cat}
+                                onClick={() => setCategory(cat)} 
+                                className={`rounded-lg px-4 py-2 text-sm transition-colors ${
+                                    category === cat 
+                                        ? 'bg-[#ec5b0b] font-medium text-white' 
+                                        : 'border border-[#262626] bg-[#121212] text-[#959595] hover:border-[#ec5b0b] hover:text-white'
+                                }`}
+                            >
+                                {cat === 'all' ? 'جميع المقالات' : cat}
+                            </button>
+                        ))}
                     </div>
 
 

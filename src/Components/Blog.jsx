@@ -3,12 +3,14 @@ import data from '../data.json'
 import Pagination from "./Pagination";
 import { useState } from "react";
 
-export default function Blog({ search }) {
+export default function Blog({ search, category }) {
     const [currentPage, setCurrentPage] = useState(1)
     const postPerPage = 6;
-    const filteredPosts = data.posts.filter(post =>
-        post.title.toLowerCase().includes(search.toLowerCase())
-    )
+    const filteredPosts = data.posts.filter(post => {
+        const matchesSearch = post.title.toLowerCase().includes(search.toLowerCase());
+        const matchesCategory = category === 'all' || post.category === category;
+        return matchesSearch && matchesCategory;
+    })
     const pages = Math.ceil(filteredPosts.length / postPerPage);
     const startIndex = (currentPage - 1) * postPerPage;
     const finishIndex = currentPage * postPerPage;
